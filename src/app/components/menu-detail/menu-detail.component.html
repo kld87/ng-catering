@@ -1,0 +1,12 @@
+<div *ngIf="!menu">
+  <app-record-dne></app-record-dne>
+</div>
+
+<div *ngIf="menu">
+  <div class="text-center print-hide margin-top-sm">
+    <div>Below is a preview of the printable menu</div>
+    <a [routerLink]="" appNavBack>Back</a> |
+    <a href="javascript:window.print()">Print</a>
+  </div>
+  <app-menu-render [menu]="menu"></app-menu-render>
+</div>

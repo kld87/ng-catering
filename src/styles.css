@@ -1,0 +1,87 @@
+/* CLARITY OVERRIDES */
+
+/* override clarity's font w/out having to muddle w/ its .scss */
+* {
+  font-family: 'Oxygen', sans-serif !important;
+}
+
+.btn {
+  text-transform: none;
+  font-weight: bold;
+  min-width: unset;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 1rem 0 0 0;
+}
+
+.card-title h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+body p {
+  margin-top: 0.5rem;
+}
+
+.clr-input[type=text], .clr-select-wrapper {
+  width: 75%;
+  max-width: 16rem;
+}
+@media (max-width: 768px) {
+  .clr-input[type=text], .clr-select-wrapper {
+    width: 100%;
+  }
+}
+.clr-select-wrapper > select {
+  width: 100%;
+}
+
+a:visited {
+  color: #0077BB;
+}
+
+/* vertically center DG cell text, needed re: action button height */
+.datagrid-cell {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+/* TAGS */
+
+html, body {
+  height: 100%;
+}
+
+
+/* UTILITY CLASSES */
+
+.margin-top-sm {
+  margin-top: 1rem;
+}
+
+.float-right {
+  float: right;
+}
+
+/* OTHER */
+
+@media print {
+   header, nav {
+    display: none !important;
+   }
+}
+
+/* to have the datagrids fill out their containers */
+.grid-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.grid-block {
+  height: 100%;
+}
+.grid-block clr-datagrid {
+  height: 100%;
+}

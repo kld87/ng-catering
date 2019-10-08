@@ -1,0 +1,73 @@
+<div class="clr-row clr-justify-content-center">
+    <div class="clr-col-12 clr-col-xl-8 clr-col-lg-10 clr-col-md-12">
+        <div class="card">
+
+          <div class="card-header">
+            <h1>Welcome to ng-catering!</h1>
+          </div>
+
+          <!-- Intro -->
+          <div class="card-block">
+            <div class="card-text">
+             This app is a PoC for a catering menu builder. You create printable menus from a list of dishes, which are composed from a list of ingredients. The ingredients can be flagged as containing meat/seafood or gluten, or if they're spicy. Flagged ingredients will be displayed with a corresponding icon that flows through into the dishes and menus they are apart of. This demo comes with some hardcoded data which you're free to manipulate during the session, but changes will not persist between reloads or multiple browser tabs.
+            </div>
+          </div>
+
+          <!-- Dashboard menu/dish/ingredient blocks -->
+          <div class="card-block">
+            <h2>Dashboard</h2>
+            <div class="clr-row">
+              <div class="clr-col-lg-4 clr-col-12">
+                <a routerLink="/menus" class="card clickable">
+                  <div class="card-header-div card-menus">
+                    <h1>{{menuNum}} Menus</h1>
+                  </div>
+                  <div class="card-block">
+                    <p class="card-text">
+                      Menus are a printable list of dishes. These menus may be reused between clients based on type of function.
+                    </p>
+                  </div>
+                </a>
+              </div>
+              <div class="clr-col-lg-4 clr-col-12">
+                <a routerLink="/dishes" class="card clickable">
+                  <div class="card-header-div card-dishes">
+                    <h1>{{dishNum}} Dishes</h1>
+                  </div>
+                  <div class="card-block">
+                    <p class="card-text">
+                      Dishes are composed of ingredients and featured in menus.
+                    </p>
+                  </div>
+                </a>
+              </div>
+              <div class="clr-col-lg-4 clr-col-12">
+                <a routerLink="/ingredients" class="card clickable">
+                  <div class="card-header-div card-ingredients">
+                    <h1>{{ingredientNum}} Ingredients</h1>
+                  </div>
+                  <div class="card-block">
+                    <p class="card-text">
+                      Ingredients form dishes and can have properties such as being spicy, or containing meat/seafood or gluten.
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- About -->
+          <div class="card-block">
+            <div class="card-title">
+              <h2>About</h2>
+            </div>
+            <div class="card-text">
+              <p>This app was created using <a href="https://angular.io">Angular</a> (using TypeScript) and the <a href="https://clarity.design">Clarity Design</a> UI Framework. As far as modern JS frameworks go, Angular would be my pick (especially over React). Mostly because it feels like a "complete package" that isn't clunky to work with, or dogmatic about its patterns. Clarity Design seems clean and slick, although laying out forms with more complex control combinations seemed a bit awkward. I don't like some of its default styling, which is easy enough to fix by overriding the classes. I expect I'll use it again, though.</p>
+              <p>For guts, it's a pretty typical SPA. I was just interested in client-side for this, so the data isn't persistent. I did write the services such that they used observables (even though they contain static data) because that's nearer to a real-world setup. Some polish could be added to the UI, and some UX improvements could be added, but as-is it's fine for a PoC.</p>
+              <p>To see the source code check it out on my <a href="https://github.com/kld87/ng-catering">GitHub</a>, and also visit my website <a href="http://kevindawe.ca">kevindawe.ca</a></p>
+            </div>
+          </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div *ngIf="!dish">
+  <app-record-dne></app-record-dne>
+</div>
+
+<div class="clr-row clr-justify-content-center" *ngIf="dish">
+  <div class="clr-col-12 clr-col-xl-5 clr-col-lg-7 clr-col-md-9">
+    <div class="card">
+      <div class="card-header">
+        <h1>
+          {{dish.name}}
+          <small><app-ingredient-icons [food]="dish"></app-ingredient-icons></small>
+        </h1>
+        <a [routerLink]="" appNavBack>Back</a>
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          {{dish.type | labelDishType}}
+        </div>
+        <div class="card-text">
+          {{dish.description}}
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          Ingredients
+        </div>
+        <div class="card-text">
+          {{dish.ingredients | labelIngredientCsv}}
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          Used in Menus
+        </div>
+        <div class="card-text">
+          <ul *ngIf="menus">
+            <li *ngFor="let menu of menus">
+              <a routerLink="/menus/{{menu.id}}"><strong>{{menu.name}}</strong></a> - {{menu.description}}
+            </li>
+            <li *ngIf="!menus.length">
+              This dish is not used in any menus.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

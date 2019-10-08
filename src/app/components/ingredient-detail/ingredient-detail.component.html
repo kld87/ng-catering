@@ -1,0 +1,37 @@
+<div *ngIf="!ingredient">
+  <app-record-dne></app-record-dne>
+</div>
+
+<div class="clr-row clr-justify-content-center" *ngIf="ingredient">
+  <div class="clr-col-12 clr-col-xl-5 clr-col-lg-7 clr-col-md-9">
+    <div class="card">
+      <div class="card-header">
+        <h1>
+          {{ingredient.name}}
+          <small><app-ingredient-icons [food]="ingredient"></app-ingredient-icons></small>
+        </h1>
+        <a [routerLink]="" appNavBack>Back</a>
+      </div>
+      <div class="card-block">
+        <div class="card-text">
+          This is an ingredient which can be used to compose dishes.
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          Used in Dishes
+        </div>
+        <div class="card-text">
+          <ul>
+            <li *ngFor="let dish of dishes">
+              <a routerLink="/dishes/{{dish.id}}"><strong>{{dish.name}}</strong></a> - {{dish.description}}
+            </li>
+            <li *ngIf="!dishes.length">
+              This ingredient is not used in any dishes.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

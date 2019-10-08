@@ -1,0 +1,23 @@
+<div class="main-container">
+  <header class="header-6">
+    <div class="branding">
+      <span>
+        <clr-icon shape="map"></clr-icon>
+        <span class="title">ng-catering</span>
+      </span>
+    </div>
+  </header>
+  <nav class="subnav">
+    <ul class="nav">
+      <li *ngFor="let nav of navs" class="nav-item">
+        <a class="nav-link" [class.active]="nav.route === activeRoute" [routerLink]="nav.route">{{nav.label}}</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="content-container">
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+

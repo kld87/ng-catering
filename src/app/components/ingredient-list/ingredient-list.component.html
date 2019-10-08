@@ -1,0 +1,84 @@
+<div class="grid-wrapper">
+  <div>
+
+    <!-- Header/alert container -->
+    <h1>
+      Ingredients
+      <button class="btn btn-success" (click)="openModal(null)">Add</button>
+    </h1>
+    <clr-alert [clrAlertType]="'warning'" [(clrAlertClosed)]="closeDeleteAlert">
+      <clr-alert-item>
+        <span class="alert-text">
+          Ingredient cannot be deleted since it is being used in one or more dishes. Refer to the ingredient detail page for more information.
+        </span>
+      </clr-alert-item>
+    </clr-alert>
+  </div>
+
+  <!-- Datagrid -->
+  <div class="grid-block">
+    <clr-datagrid>
+      <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
+      <clr-dg-column [clrDgField]="'isMeat'">Meat/Seafood&nbsp;<app-meat-icon></app-meat-icon></clr-dg-column>
+      <clr-dg-column [clrDgField]="'isGluten'">Gluten&nbsp;<app-gluten-icon></app-gluten-icon></clr-dg-column>
+      <clr-dg-column [clrDgField]="'isSpicy'">Spicy&nbsp;<app-spicy-icon></app-spicy-icon></clr-dg-column>
+      <clr-dg-column>Actions</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let ingredient of ingredients">
+        <clr-dg-cell>
+          <strong><a routerLink="/ingredients/{{ingredient.id}}">{{ingredient.name}}</a></strong>
+        </clr-dg-cell>
+        <clr-dg-cell>{{ingredient.isMeat}}</clr-dg-cell>
+        <clr-dg-cell>{{ingredient.isSpicy}}</clr-dg-cell>
+        <clr-dg-cell>{{ingredient.isGluten}}</clr-dg-cell>
+        <clr-dg-cell>
+          <div>
+            <button class="btn btn-sm btn-success-outline" (click)="openModal(ingredient)">Edit</button>
+            <button class="btn btn-sm btn-danger-outline" (click)="deleteIngredient(ingredient)">Delete</button>
+          </div>
+        </clr-dg-cell>
+      </clr-dg-row>
+
+      <clr-dg-footer>{{ingredients.length}} Ingredients</clr-dg-footer>
+    </clr-datagrid>
+  </div>
+</div>
+
+<!-- Add/edit ingredient modal -->
+<clr-modal [(clrModalOpen)]="modalOpen">
+  <h3 class="modal-title">{{modalAction}} Ingredient</h3>
+  <div class="modal-body">
+    <form clrForm [formGroup]="modalForm">
+
+      <clr-input-container>
+        <label class="clr-col-12 clr-col-md-3">Name</label>
+        <input class="clr-col-12 clr-col-md-9" clrInput type="text" formControlName="name" placeholder="Name of ingredient" required />
+        <clr-control-error>This field is mandatory</clr-control-error>
+      </clr-input-container>
+
+      <div class="clr-form-control clr-row">
+        <label class="clr-control-label clr-col-12 clr-col-md-3">Attributes</label>
+        <div class="clr-control-container clr-col-12 clr-col-md-9">
+          <div class="clr-checkbox-wrapper">
+            <input type="checkbox" id="attr-meat" formControlName="isMeat" class="clr-checkbox">
+            <label for="attr-meat" class="clr-control-label clr-col-12">Contains meat/seafood <app-meat-icon></app-meat-icon></label>
+          </div>
+          <div class="clr-checkbox-wrapper">
+            <input type="checkbox" id="attr-gluten" formControlName="isGluten" class="clr-checkbox">
+            <label for="attr-gluten" class="clr-control-label clr-col-12">Contains gluten <app-gluten-icon></app-gluten-icon></label>
+          </div>
+          <div class="clr-checkbox-wrapper">
+            <input type="checkbox" id="attr-spicy" formControlName="isSpicy" class="clr-checkbox">
+            <label for="attr-spicy" class="clr-control-label clr-col-12">Is spicy <app-spicy-icon></app-spicy-icon></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="closeModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="submitModal()">{{modalAction}}</button>
+      </div>
+
+    </form>
+  </div>
+</clr-modal>

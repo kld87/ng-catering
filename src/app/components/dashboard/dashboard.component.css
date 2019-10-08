@@ -1,0 +1,22 @@
+.card-header-div {
+  height: 2rem;
+  text-align: center;
+}
+
+.card-header-div h1 {
+  margin-top: 0.25rem;
+}
+
+.card-menus {
+  background-color: #400;
+}
+.card-dishes {
+  background-color: #440;
+}
+.card-ingredients {
+  background-color: #404;
+}
+
+.card-header-div > h1 {
+  color: white;
+}

@@ -1,0 +1,45 @@
+<div class="text-center">
+  <div class="menu-container" *ngIf="menu">
+    <div>
+      <div class="card">
+        <div class="card-header text-center">
+          {{menu.name}}
+        </div>
+        <div class="card-block">
+          <div class="card-text text-center">
+            <em>{{menu.description}}</em>
+          </div>
+        </div>
+        <div *ngIf="appetizers.length" class="card-block">
+          <div class="card-title">
+            Appetizers
+          </div>
+          <div class="card-text">
+            <app-dish-render [dishes]="appetizers"></app-dish-render>
+          </div>
+        </div>
+        <div *ngIf="entrees.length" class="card-block">
+          <div class="card-title">
+            Entrées
+          </div>
+          <div class="card-text">
+            <ul>
+              <app-dish-render [dishes]="entrees"></app-dish-render>
+            </ul>
+          </div>
+        </div>
+        <div *ngIf="desserts.length" class="card-block">
+          <div class="card-title">
+            Desserts
+          </div>
+          <div class="card-text">
+            <app-dish-render [dishes]="desserts"></app-dish-render>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <em>Bon Appétit!</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

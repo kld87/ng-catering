@@ -1,0 +1,128 @@
+<div class="grid-wrapper">
+  <!-- Header -->
+  <div>
+    <h1>
+      Dishes
+      <button class="btn btn-success" (click)="openModal(null)">Add</button>
+    </h1>
+    <clr-alert [clrAlertType]="'warning'" [(clrAlertClosed)]="closeDeleteAlert">
+      <clr-alert-item>
+        <span class="alert-text">
+          Dish cannot be deleted since it is being used in one or more menus. Refer to the dish detail page for more information.
+        </span>
+      </clr-alert-item>
+    </clr-alert>
+  </div>
+
+  <!-- Datagrid -->
+  <div class="grid-block">
+    <clr-datagrid>
+      <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
+      <clr-dg-column [clrDgField]="'description'">Description</clr-dg-column>
+      <clr-dg-column>Attributes</clr-dg-column>
+      <clr-dg-column>Actions</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let dish of dishes">
+        <clr-dg-cell>
+          <strong><a routerLink="/dishes/{{dish.id}}">{{dish.name}}</a></strong>
+        </clr-dg-cell>
+        <clr-dg-cell>{{dish.description}}</clr-dg-cell>
+        <clr-dg-cell>
+          <app-ingredient-icons [food]="dish"></app-ingredient-icons>
+        </clr-dg-cell>
+        <clr-dg-cell>
+          <div>
+            <button class="btn btn-sm btn-success-outline" (click)="openModal(dish)">Edit</button>
+            <button class="btn btn-sm btn-danger-outline" (click)="deleteDish(dish)">Delete</button>
+          </div>
+        </clr-dg-cell>
+      </clr-dg-row>
+
+      <clr-dg-footer>{{dishes.length}} Dishes</clr-dg-footer>
+    </clr-datagrid>
+  </div>
+</div>
+
+<!-- Add/edit dish modal -->
+<clr-modal [(clrModalOpen)]="modalOpen">
+  <h3 class="modal-title">{{modalAction}} Dish</h3>
+  <div class="modal-body">
+    <form clrForm [formGroup]="modalForm">
+
+      <!-- Basic form controls -->
+      <clr-input-container>
+        <label class="clr-col-12 clr-col-md-3">Name</label>
+        <input class="clr-col-12 clr-col-md-9" clrInput type="text" formControlName="name" placeholder="Name of dish" required />
+        <clr-control-error>This field is mandatory</clr-control-error>
+      </clr-input-container>
+
+      <clr-input-container>
+        <label class="clr-col-12 clr-col-md-3">Description</label>
+        <input class="clr-col-12 clr-col-md-9" clrInput type="text" formControlName="description" placeholder="Describe the dish" required />
+        <clr-control-error>This field is mandatory</clr-control-error>
+      </clr-input-container>
+
+      <clr-select-container>
+        <label class="clr-col-12 clr-col-md-3">Type</label>
+        <select class="clr-col-12 clr-col-md-9" clrSelect formControlName="type" required>
+          <option value="0">Appetizer</option>
+          <option value="1">Entrée</option>
+          <option value="2">Dessert</option>
+        </select>
+      </clr-select-container>
+
+      <clr-input-container>
+        <label class="clr-col-12 clr-col-md-3">Price ($)</label>
+        <input class="clr-col-12 clr-col-md-9" clrInput type="number" formControlName="price" placeholder="Price of the dish" required/>
+        <clr-control-error>Please enter a valid price</clr-control-error>
+      </clr-input-container>
+
+    </form>
+
+    <!-- Ingredient picker logic -->
+    <h4 class="margin-top-sm">
+      Ingredients
+      <small><app-ingredient-icons [food]="dishIngredients"></app-ingredient-icons></small>
+    </h4>
+
+    <div class="alert alert-warning" role="alert" *ngIf="!dishIngredients.length">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-triangle"></clr-icon>
+          </div>
+          <div class="alert-text">
+            Dishes must include at least one ingredient.
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <div class="clr-row ingredient-list">
+      <div *ngFor="let ingredient of dishIngredients; let i = index" class="clr-col-6 clr-col-md-4">
+        <button (click)="removeIngredient(i)" class="btn btn-sm btn-warning-outline">
+          <fa-icon [icon]="icons.times"></fa-icon>
+        </button>
+        {{ingredient | labelIngredientCsv}}
+        <app-ingredient-icons [food]="ingredient"></app-ingredient-icons>
+      </div>
+    </div>
+
+    <div class="clr-select-wrapper ingredient-select-wrapper">
+      <select [(ngModel)]="selectedIngredient" class="clr-select">
+        <option [ngValue]="null">Add Ingredient</option>
+        <option *ngFor="let ingredient of filteredIngredients" [ngValue]="ingredient.id">{{ingredient.name}}</option>
+      </select>
+      <button (click)="addIngredient(selectedIngredient)" [disabled]="!selectedIngredient" class="btn btn-sm btn-success-outline">
+        <fa-icon [icon]="icons.plus"></fa-icon>
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="closeModal()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="submitModal()" [disabled]="!dishIngredients.length">{{modalAction}}</button>
+    </div>
+
+  </div>
+</clr-modal>

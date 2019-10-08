@@ -1,0 +1,10 @@
+<!-- Used in menu-render componenet -->
+<div *ngIf="dishes">
+  <div *ngFor="let dish of dishes">
+    <p>
+      <strong>{{dish.name}}</strong><app-ingredient-icons [food]="dish"></app-ingredient-icons> - <em>{{dish.description}}</em>
+      <span class="float-right"><em><strong>${{dish.price}}</strong></em></span>
+    </p>
+    <small>{{dish.ingredients | labelIngredientCsv}}</small>
+  </div>
+</div>

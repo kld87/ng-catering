@@ -1,0 +1,6 @@
+/* additional print settings in style.css */
+@media print {
+   .print-hide {
+    display: none !important;
+   }
+}

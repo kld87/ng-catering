@@ -1,0 +1,12 @@
+.ingredient-select-wrapper {
+  width: 10rem;
+  display: inline-block;
+}
+
+.ingredient-list {
+  padding: 0.5rem;
+}
+
+.modal-body button {
+  margin: 0.2rem;
+}
